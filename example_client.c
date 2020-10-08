@@ -35,14 +35,18 @@ int main(void) {
     inputpointer=user_input;
     while(*inputpointer!=' '&&(*inputpointer!='\0')){//storing command in struct
       mymessage->cmd[counter]=*inputpointer;
+      //printf("input is %s",inputpointer);
       counter++;
       inputpointer++;
       //printf("testing %s \n",inputpointer);
     }
     mymessage->cmd[counter]='\0';
     counter=0;
-    //printf("testing %s \n",inputpointer);
+    //printf("input is %s",inputpointer);
     inputpointer++;
+    //printf("testing %s \n",inputpointer);
+    //inputpointer++;
+    //printf("input is %c",*inputpointer);
 
     while(*inputpointer!=' '&&(*inputpointer!='\0')){//storing command in struct
       mymessage->args1[counter]=*inputpointer;
@@ -62,7 +66,7 @@ int main(void) {
     printf("message stored in struct %s \n",mymessage->cmd);
     printf("args1 stored in struct %s \n",mymessage->args1);
     printf("args2 stored in struct %s \n",mymessage->args2);
-    free(mymessage);
+    
     // send the input to server
     //send_message(sockfd, user_input, strlen(user_input));
     send_message(sockfd, mymessage, strlen(user_input));

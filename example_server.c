@@ -29,7 +29,7 @@ int main(void) {
     if (byte_count <= 0) {
       break;
     }
-    funcname=msg->cmd;
+    //funcname=msg->cmd;
     printf("Client: %s\n", msg);
     send_message(clientfd, greeting, strlen(greeting));
   }
