@@ -86,9 +86,9 @@ int connect_to_server(const char *host, uint16_t port, int *sockfd) {
   return 0;
 }
 
-ssize_t send_message(int sockfd, const char *buf, size_t len) {
-  return send(sockfd, buf, len, 0);
-}
+// ssize_t send_message(int sockfd, const char *buf, size_t len) {
+//   return send(sockfd, buf, len, 0);
+// }old
 ssize_t send_message(int sockfd, const char *buf, size_t len) {
   return send(sockfd, buf, len, 0);
 }
