@@ -21,6 +21,7 @@ int main(void) {
   char * inputpointer;
   int counter=0;
 
+
   if (connect_to_server("0.0.0.0", 10000, &sockfd) < 0) {
     fprintf(stderr, "oh no\n");
     return -1;
@@ -32,6 +33,7 @@ int main(void) {
     // read user input from command line
     fgets(user_input, BUFSIZE, stdin);//(where to store,characters to read,read from location)
      message_t * mymessage = (message_t *)malloc(sizeof(message_t));
+     char *castingstruct=
     inputpointer=user_input;
     while(*inputpointer!=' '&&(*inputpointer!='\0')){//storing command in struct
       mymessage->cmd[counter]=*inputpointer;
@@ -69,7 +71,7 @@ int main(void) {
     
     // send the input to server
     //send_message(sockfd, user_input, strlen(user_input));
-    send_message(sockfd, mymessage, strlen(user_input));
+    send_message(sockfd, (char*)&mymessage, strlen(sizeof(struct message_t)));
     free(mymessage);
     // receive a msg from the server
     ssize_t byte_count = recv_message(sockfd, server_msg, sizeof(server_msg));
