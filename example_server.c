@@ -5,7 +5,7 @@
 #include "RPC.h"
 
 // #define BUFSIZE   1024
-#define BUFSIZE   3072;
+#define BUFSIZE   3072
 char funcname[1024];
 
 int main(void) {

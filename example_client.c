@@ -70,8 +70,8 @@ int main(void) {
     printf("args2 stored in struct %s \n",mymessage->args2);
     
     // send the input to server
-    send_message(sockfd, user_input, strlen(user_input));
-    //send_message(sockfd, (char*)&mymessage, strlen((char *)(sizeof(struct message_t))));
+    //send_message(sockfd, user_input, strlen(user_input));
+    send_message(sockfd, (char*)&mymessage, strlen((char *)(sizeof())));
     free(mymessage);
     // receive a msg from the server
     ssize_t byte_count = recv_message(sockfd, server_msg, sizeof(server_msg));
