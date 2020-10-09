@@ -35,7 +35,7 @@ int main(void) {
     //printf("Client: %s\n", msg);
     printf("Client:command %s\n", mymsg->cmd);
     printf("Client:args1 %s\n", mymsg->args1);
-    printf("%s",msg);
+    printf("%s\n",msg);
     send_message(clientfd, greeting, strlen(greeting));
   }
 
