@@ -25,12 +25,14 @@ int main(void) {
 
   while (strcmp(msg, "quit\n")) {
     memset(msg, 0, sizeof(msg));
-    ssize_t byte_count = recv_message(clientfd, msg, BUFSIZE);
+     ssize_t byte_count = recv_message(clientfd, msg, BUFSIZE);
     if (byte_count <= 0) {
       break;
     }
     //funcname=msg->cmd;
-    printf("Client: %s\n", msg);
+    struct message_t *mymsg=(struct message_t)msg;
+    //printf("Client: %s\n", msg);
+    printf("Client: %s\n", mymsg->cmd);
     send_message(clientfd, greeting, strlen(greeting));
   }
 
