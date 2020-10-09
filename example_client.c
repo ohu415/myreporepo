@@ -32,8 +32,8 @@ int main(void) {
 
     // read user input from command line
     fgets(user_input, BUFSIZE, stdin);//(where to store,characters to read,read from location)
-     message_t * mymessage = (message_t *)malloc(sizeof(message_t));
-     char *castingstruct=
+    message_t * mymessage = (message_t *)malloc(sizeof(message_t));
+     //char *castingstruct=
     inputpointer=user_input;
     while(*inputpointer!=' '&&(*inputpointer!='\0')){//storing command in struct
       mymessage->cmd[counter]=*inputpointer;
@@ -50,12 +50,13 @@ int main(void) {
     //inputpointer++;
     //printf("input is %c",*inputpointer);
 
-    while(*inputpointer!=' '&&(*inputpointer!='\0')){//storing command in struct
+    while(*inputpointer!=' '&&(*inputpointer!='\0')&&(*inputpointer!='\n')){//storing command in struct
       mymessage->args1[counter]=*inputpointer;
       counter++;
       inputpointer++;
     }
     mymessage->args1[counter]='\0';
+    printf("args1:%s\n",mymessage->args1);
     counter=0;
     inputpointer++;
     while(*inputpointer!=' '&&(*inputpointer!='\0')){//storing command in struct
@@ -64,6 +65,7 @@ int main(void) {
       inputpointer++;
     }
     mymessage->args2[counter]='\0';
+    printf("args2:%s\n",mymessage->args2);
     counter=0;//reset counter
     printf("message stored in struct %s \n",mymessage->cmd);
     printf("args1 stored in struct %s \n",mymessage->args1);
@@ -71,16 +73,16 @@ int main(void) {
     
     // send the input to server
     //send_message(sockfd, user_input, strlen(user_input));
-    send_message(sockfd, (char*)&mymessage, strlen((char *)(sizeof(struct message_t))));
-    free(mymessage);
+    //send_message(sockfd, (char*)&mymessage, strlen((char *)(sizeof(struct message_t))));
+    send_message(sockfd, ((char *)&mymessage), strlen((char *)(sizeof(struct message_t))));
     // receive a msg from the server
     ssize_t byte_count = recv_message(sockfd, server_msg, sizeof(server_msg));
-    // if (byte_count <= 0) {
-    //   break;
-    // }
-    // printf("Server: %s\n", server_msg);
+    free(mymessage);
+    if (byte_count <= 0) {
+      break;
+    }
+    printf("Server: %s\n", server_msg);
   }
 
   return 0;
 }
-
