@@ -20,6 +20,7 @@ int main(void) {
   char server_msg[BUFSIZE] = { 0 };
   char * inputpointer;
   int counter=0;
+  int size;
 
 
   if (connect_to_server("0.0.0.0", 10000, &sockfd) < 0) {
@@ -73,11 +74,12 @@ int main(void) {
     
     // send the input to server
     //send_message(sockfd, user_input, strlen(user_input));
-    //send_message(sockfd, (char*)&mymessage, strlen((char *)(sizeof(struct message_t))));
+    size=sizeof(struct message_t);
+    //send_message(sockfd, (char*)&mymessage, strlen((char*)size));
     send_message(sockfd, ((char *)&mymessage), strlen((char *)(sizeof(struct message_t))));
     // receive a msg from the server
     ssize_t byte_count = recv_message(sockfd, server_msg, sizeof(server_msg));
-    free(mymessage);
+    //free(mymessage);
     if (byte_count <= 0) {
       break;
     }

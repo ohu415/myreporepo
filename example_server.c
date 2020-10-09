@@ -30,10 +30,11 @@ int main(void) {
     if (byte_count <= 0) {
       break;
     }
-    //funcname=msg->cmd;
-    //struct message_t *mymsg=(struct message_t*)msg;
-    //printf("Client: %s\n", msg);
-    // printf("Client:command %s\n", mymsg->cmd);
+    struct message_t *mymsg=(struct message_t*)msg;
+    printf("Client:command %s\n", mymsg->cmd);
+    printf("Client:args1 %s\n", mymsg->args1);
+    printf("Client:message is %s\n", msg);
+    //free(mymsg);
     // printf("Client:args1 %s\n", mymsg->args1);
     // printf("%s\n",msg);
     send_message(clientfd, greeting, strlen(greeting));
