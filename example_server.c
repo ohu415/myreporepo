@@ -4,7 +4,8 @@
 #include "a1_lib.h"
 #include "RPC.h"
 
-#define BUFSIZE   1024
+// #define BUFSIZE   1024
+#define BUFSIZE   3072;
 char funcname[1024];
 
 int main(void) {
@@ -30,9 +31,11 @@ int main(void) {
       break;
     }
     //funcname=msg->cmd;
-    struct message_t *mymsg=(struct message_t)msg;
+    struct message_t *mymsg=(struct message_t*)msg;
     //printf("Client: %s\n", msg);
-    printf("Client: %s\n", mymsg->cmd);
+    printf("Client:command %s\n", mymsg->cmd);
+    printf("Client:args1 %s\n", mymsg->args1);
+    printf("%s",msg);
     send_message(clientfd, greeting, strlen(greeting));
   }
 
